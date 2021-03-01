@@ -2,8 +2,9 @@ package main
 
 import (
 	"log"
-	"os"
 	"path"
+	"path/filepath"
+	"runtime"
 
 	"github.com/getlantern/systray"
 	"github.com/ismtabo/pulseaudio-tray-toggle/app"
@@ -16,11 +17,12 @@ import (
 // then use some properties.
 //
 func main() {
-	dir, err := os.Getwd()
+	_, fileName, _, _ := runtime.Caller(0)
+	dir, err := filepath.Abs(filepath.Dir(fileName))
 	if err != nil {
 		log.Fatal(err)
 	}
-	config := path.Join(dir, "config.yml")
+	config := path.Join(dir, "./config.yml")
 	application, err := app.NewApplication(&config)
 	if err != nil {
 		log.Fatal(err)

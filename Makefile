@@ -1,5 +1,8 @@
 build:
-	go build -o bin/main cmd/pulseaudio-tray-toggle/main.go
+	go build main.go
+
+install:
+	go install github.com/ismtabo/pulseaudio-tray-toggle
 
 run:
 	go run main.go
@@ -14,7 +17,7 @@ compile:
 	GOOS=linux GOARCH=386 go build -o bin/main-linux-386 main.go
 	# Windows
 	GOOS=windows GOARCH=386 go build -o bin/main-windows-386 main.go
-        # 64-Bit
+	# 64-Bit
 	# FreeBDS
 	GOOS=freebsd GOARCH=amd64 go build -o bin/main-freebsd-amd64 main.go
 	# MacOS

@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path"
+	"path/filepath"
+	"runtime"
 
 	"github.com/getlantern/systray"
 	"github.com/getlantern/systray/example/icon"
@@ -65,7 +68,12 @@ func NewApplication(configPath *string) (*Application, error) {
 
 // iniTrayIcon function
 func (application Application) iniTrayIcon() {
-	file, err := os.Open("static/img/headphone-icon.png")
+	_, fileName, _, _ := runtime.Caller(0)
+	dir, err := filepath.Abs(filepath.Dir(fileName))
+	if err != nil {
+		log.Fatal(err)
+	}
+	file, err := os.Open(path.Join(dir, "../static/img/headphone-icon.png"))
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
